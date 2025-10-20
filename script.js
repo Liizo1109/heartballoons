@@ -5,7 +5,7 @@ var captureContainers = [];
 var captureIndex = 0;
 var textObj;
 var startTime = Date.now();
-var duration = 100000; // giữ như bạn đang dùng
+var duration = 40000; // giữ như bạn đang dùng
 
 // Read 'msg' from URL and default message
 function getMessageFromURL() {
@@ -191,3 +191,4 @@ function tick(event) {
 }
 
 init();
+
