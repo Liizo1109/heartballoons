@@ -1,22 +1,25 @@
-/* Full-bleed layout: no scroll, canvas covers screen */
+/* Full-bleed layout */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    /* Cho phép thu nhỏ: đừng khóa overflow */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body {
     font-family: 'Dancing Script', cursive;
     color: #111;
     background: #312;
+    min-height: 110vh; /* then chốt giúp pinch zoom-out hoạt động */
 }
 
 #testCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
     display: block;
     background-color: #312;
 }
@@ -137,4 +140,3 @@ body {
         grid-column: 1 / -1;
     }
 }
-
