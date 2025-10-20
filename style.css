@@ -11,10 +11,10 @@ body {
     background: #312;
 }
 
-/* Canvas occupies the visual viewport */
+/* Canvas occupies the visual viewport
 #testCanvas {
-    position: fixed;
-    inset: 0;
+    /* position: fixed; */
+    /* inset: 0; */
     width: 100%;
     height: 100%;
     display: block;
@@ -137,4 +137,3 @@ body {
         grid-column: 1 / -1;
     }
 }
-
