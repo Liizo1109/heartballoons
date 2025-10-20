@@ -67,7 +67,8 @@ function init() {
     }
 
     // Vietnamese-friendly font + visible color (white on dark canvas)
-    textObj = new createjs.Text(getMessageFromURL(), "bold 48px 'Dancing Script', cursive", "#ffffff");
+    let fontSize = Math.min(canvas.width * 0.07, 48); // Tỷ lệ 7% chiều rộng, max 48px
+    textObj = new createjs.Text(getMessageFromURL(), `bold ${fontSize}px 'Dancing Script', cursive`, "#ffffff");
     textObj.textAlign = "center";
     textObj.lineHeight = 40;
     textObj.x = canvas.width / 2;
@@ -105,6 +106,9 @@ function init() {
     // Handle resize (orientation change, address bar show/hide, v.v.)
     window.addEventListener('resize', function() {
         resizeCanvas();
+        let fontSize = Math.min(canvas.width * 0.07, 48);
+        textObj.font = `bold ${fontSize}px 'Dancing Script', cursive`;
+        stage.update();
     });
 
     // Ẩn panel nếu truy cập bằng link chia sẻ
@@ -159,4 +163,5 @@ function tick(event) {
 }
 
 init();
+
 
