@@ -5,9 +5,8 @@ var captureContainers;
 var captureIndex;
 var textObj;
 var startTime = Date.now();
-var duration = 100000;
+var duration = 100000; 
 
-// Read 'msg' from URL and default message
 function getMessageFromURL() {
     var params = new URLSearchParams(window.location.search);
     var msg = params.get('msg');
@@ -27,13 +26,26 @@ function makeShareLink(msg) {
     return url;
 }
 
+function resizeCanvas() {
+    // Dùng kích thước CSS thực tế của phần tử canvas
+    var cw = canvas.clientWidth;
+    var ch = canvas.clientHeight;
+    canvas.width = cw;
+    canvas.height = ch;
+
+    if (textObj) {
+        textObj.x = cw / 2;
+        textObj.y = ch / 2 - 20;
+    }
+
+    stage.update();
+}
+
 function init() {
-    // create a new stage and point it at our canvas:
     canvas = document.getElementById("testCanvas");
     stage = new createjs.Stage(canvas);
-    // Fit to window
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
+    resizeCanvas();
 
     var w = canvas.width;
     var h = canvas.height;
@@ -58,13 +70,13 @@ function init() {
     textObj = new createjs.Text(getMessageFromURL(), "bold 48px 'Dancing Script', cursive", "#ffffff");
     textObj.textAlign = "center";
     textObj.lineHeight = 40;
-    textObj.x = w / 2;
-    textObj.y = h / 2 - 20;
+    textObj.x = canvas.width / 2;
+    textObj.y = canvas.height / 2 - 20;
     stage.addChild(textObj);
 
     for (i = 0; i < 100; i++) {
         var captureContainer = new createjs.Container();
-        captureContainer.cache(0, 0, w, h);
+        captureContainer.cache(0, 0, canvas.width, canvas.height);
         captureContainers.push(captureContainer);
     }
 
@@ -90,13 +102,12 @@ function init() {
         });
     }
 
-    // Handle resize
+    // Handle resize (orientation change, address bar show/hide, v.v.)
     window.addEventListener('resize', function() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        textObj.x = canvas.width / 2;
-        textObj.y = canvas.height / 2 - 20;
+        resizeCanvas();
     });
+
+    // Ẩn panel nếu truy cập bằng link chia sẻ
     if (new URLSearchParams(window.location.search).has('msg')) {
         var panel = document.getElementById('controlPanel');
         if (panel) panel.style.display = 'none';
@@ -109,15 +120,14 @@ function tick(event) {
     var l = container.numChildren;
 
     captureIndex = (captureIndex + 1) % captureContainers.length;
-    // ----- Chuyển màu từ trắng sang đen trong 15 giây -----
-    var elapsed = Date.now() - startTime;
-    var ratio = Math.min(elapsed / duration, 1); // giá trị từ 0 đến 1
 
-// Pha màu (trắng -> đen): trắng = 255, ratio càng lớn thì càng đen
-    var value = Math.round(255 * (1 - ratio));
+    // ----- Chuyển màu từ trắng sang đen trong 15 giây (giữ logic hiện tại) -----
+    var elapsed = Date.now() - startTime;
+    var ratio = Math.min(elapsed / duration, 1);
+    var value = Math.round(255 * (1 - ratio)); // 255 -> 0
     var newColor = "rgb(" + value + "," + value + "," + value + ")";
     textObj.color = newColor;
-// ------------------------------------------------------
+    // ---------------------------------------------------------------------------
 
     stage.removeChildAt(0);
     var captureContainer = captureContainers[captureIndex];
