@@ -5,7 +5,7 @@ var captureContainers;
 var captureIndex;
 var textObj;
 var startTime = Date.now();
-var duration = 100000; 
+var duration = 80000; 
 
 function getMessageFromURL() {
     var params = new URLSearchParams(window.location.search);
@@ -159,3 +159,4 @@ function tick(event) {
 }
 
 init();
+
