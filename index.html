@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Gửi lời chúc</title>
+    <!-- Choose your preferred font family; Dancing Script shown as example -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap&subset=vietnamese" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="testCanvas"></canvas>
+
+<!-- Control panel (auto hides if ?msg=... is present) -->
+<div class="control-panel" id="controlPanel">
+    <h2>Viết lời chúc</h2>
+    <textarea id="messageInput" rows="3" placeholder="Nhập lời chúc của bạn..."></textarea>
+    <div class="actions">
+        <button id="previewBtn">Xem trước</button>
+        <button id="makeLinkBtn">Tạo liên kết</button>
+        <input id="shareLink" type="text" readonly placeholder="Liên kết sẽ hiện ở đây" />
+        <button id="copyBtn">Sao chép</button>
+    </div>
+    <p class="hint">Gửi liên kết này cho người thân để họ xem lời chúc của bạn 💖</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+<script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1524180/codepen-template-1.0.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

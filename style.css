@@ -1,0 +1,140 @@
+/* Full-bleed layout: no scroll, canvas covers screen */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Dancing Script', cursive;
+    color: #111;
+    background: #312;
+}
+
+/* Canvas occupies the visual viewport */
+#testCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: #312;
+}
+
+/* Floating control panel (Glassmorphism) */
+.control-panel {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: env(safe-area-inset-bottom, 16px);
+    max-width: 720px;
+    width: calc(100% - 32px);
+    margin: 0 auto;
+
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.40);
+
+    overflow: hidden;
+}
+
+/* Title */
+.control-panel h2 {
+    margin: 0 0 12px 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Textarea styling (soft glass) */
+.control-panel textarea {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+
+    border-radius: 16px;
+    border: none;
+    padding: 14px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 18px;
+
+    background: rgba(255,255,255,0.6);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+    outline: none;
+}
+
+.control-panel textarea:focus {
+    box-shadow: 0 0 0 2px rgba(255,130,180, 0.5);
+}
+
+/* Actions section */
+.actions {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Buttons (pastel gradient + hover) */
+.actions button {
+    border: none;
+    border-radius: 14px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    color: white;
+    font-family: inherit;
+
+    background: linear-gradient(135deg, #ff8ec7, #ffb4d3);
+    box-shadow: 0 4px 14px rgba(255,130,180, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.actions button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255,130,180, 0.5);
+}
+
+/* Input link */
+.actions input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: none;
+
+    background: rgba(255,255,255,0.6);
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Hint text */
+.hint {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: rgba(80,80,80,0.85);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+    .actions {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    .actions input[type="text"] {
+        grid-column: 1 / -1;
+    }
+}
